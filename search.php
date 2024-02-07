@@ -1,12 +1,29 @@
 <?php
-require_once "./src/loadProducts.php"
+    $message = "";
+    $db = mysqli_connect("127.0.0.1:4306","root","","domaci15");
+    $products = [];
+    $pretraga = $_GET['pretraga'];
+    $result = $db->query("SELECT * FROM products WHERE product_name LIKE '%$pretraga%'");
+
+    if($result->num_rows > 0){
+        $products = $result->fetch_all(MYSQLI_ASSOC);
+    }
+    else{
+        $message = "Nismo pronasli ni jedan rezultat";
+    }
+    
 ?>
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Products</title>
+    <title>Pretraga</title>
     <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
     <style>
         *{
@@ -34,7 +51,7 @@ require_once "./src/loadProducts.php"
 <div class="container" id="products">
 <div class="row">
     <div class="col-12">
-        <h1 class='text-center mb-5'>Proizvodi</h1>
+        <h1 class='text-center'>Trazeni rezultat</h1>
 
         <div class="row">
             <?php foreach ($products as $product):?>
@@ -47,6 +64,8 @@ require_once "./src/loadProducts.php"
                 </div>
 
             <?php endforeach?>
+
+            <p class="text-danger"><?=$message?></p>
         </div>
     </div>
 </div>

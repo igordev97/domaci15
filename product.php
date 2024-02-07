@@ -1,6 +1,14 @@
 <?php
-require_once "./src/loadProducts.php"
+require_once "./src/database.php";
+$id = $_GET["id"];
+$result = $db->query("SELECT * FROM products WHERE id = '$id'");
+if($result->num_rows > 0){
+    $product = $result->fetch_assoc();
+    
+}
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -34,20 +42,11 @@ require_once "./src/loadProducts.php"
 <div class="container" id="products">
 <div class="row">
     <div class="col-12">
-        <h1 class='text-center mb-5'>Proizvodi</h1>
-
-        <div class="row">
-            <?php foreach ($products as $product):?>
-                <div class="col-3">
-                    <img src="./images/<?=$product['img_name']?>" alt="" width="200px">
-                    <h3><?=$product['product_name']?></h3>
-                    <p><?=$product['product_description']?></p>
-                    <p>&euro; <?=$product['price']?></p>
-                    <a rel="stylesheet" href="./product.php?id=<?=$product['id']?>" class="btn btn-primary">Vidi proizvod</a>
-                </div>
-
-            <?php endforeach?>
-        </div>
+    <h1 class='text-center'>Proizvod</h1>
+        <img class='text-center' src="./images/<?= $product["img_name"]?>" alt="" width="400">
+        <h2  class='text-center'><?= $product["product_name"]?></h2>
+        <h2  class='text-center'><?= $product["product_description"]?></h2>
+        <h2  class='text-center'><?= $product["price"]?></h2>
     </div>
 </div>
 
