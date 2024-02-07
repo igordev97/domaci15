@@ -1,11 +1,6 @@
 <?php
 require_once "./src/database.php";
-$id = $_GET["id"];
-$result = $db->query("SELECT * FROM products WHERE id = '$id'");
-if($result->num_rows > 0){
-    $product = $result->fetch_assoc();
-    
-}
+require_once "./src/loadproduct.php"
 ?>
 
 
@@ -16,13 +11,7 @@ if($result->num_rows > 0){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Products</title>
     <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
-    <style>
-        *{
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-    </style>
+    <link rel="stylesheet" href="./app.css">
 </head>
 <body>
 
@@ -45,8 +34,8 @@ if($result->num_rows > 0){
     <h1 class='text-center'>Proizvod</h1>
         <img class='text-center' src="./images/<?= $product["img_name"]?>" alt="" width="400">
         <h2  class='text-center'><?= $product["product_name"]?></h2>
-        <h2  class='text-center'><?= $product["product_description"]?></h2>
-        <h2  class='text-center'><?= $product["price"]?></h2>
+        <p  class='text-center lead'><?= $product["product_description"]?></p>
+        <h2  class='text-center'>Cena <?= $product["price"]?> &euro;</h2>
     </div>
 </div>
 

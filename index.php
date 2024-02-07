@@ -1,5 +1,6 @@
 <?php
-require_once "./src/loadProducts.php"
+require_once "./src/database.php";
+require_once "./src/loadProducts.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -8,13 +9,7 @@ require_once "./src/loadProducts.php"
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Products</title>
     <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
-    <style>
-        *{
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-    </style>
+    <link rel="stylesheet" href="./app.css">
 </head>
 <body>
 
@@ -38,8 +33,8 @@ require_once "./src/loadProducts.php"
 
         <div class="row">
             <?php foreach ($products as $product):?>
-                <div class="col-3">
-                    <img src="./images/<?=$product['img_name']?>" alt="" width="200px">
+                <div class="col-3 mb-3">
+                    <img src="./images/<?=$product['img_name']?>" alt="" class='product-img'>
                     <h3><?=$product['product_name']?></h3>
                     <p><?=$product['product_description']?></p>
                     <p>&euro; <?=$product['price']?></p>

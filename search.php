@@ -1,22 +1,8 @@
 <?php
-    $message = "";
-    $db = mysqli_connect("127.0.0.1:4306","root","","domaci15");
-    $products = [];
-    $pretraga = $_GET['pretraga'];
-    $result = $db->query("SELECT * FROM products WHERE product_name LIKE '%$pretraga%'");
-
-    if($result->num_rows > 0){
-        $products = $result->fetch_all(MYSQLI_ASSOC);
-    }
-    else{
-        $message = "Nismo pronasli ni jedan rezultat";
-    }
+    require_once "./src/database.php";
+    require_once "./src/searchProduct.php";
     
 ?>
-
-
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -25,13 +11,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pretraga</title>
     <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
-    <style>
-        *{
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-    </style>
+    <link rel="stylesheet" href="./app.css">
+       
 </head>
 <body>
 
@@ -55,8 +36,8 @@
 
         <div class="row">
             <?php foreach ($products as $product):?>
-                <div class="col-3">
-                    <img src="./images/<?=$product['img_name']?>" alt="" width="200px">
+                <div class="col-3  mb-3">
+                    <img src="./images/<?=$product['img_name']?>" alt=""  class='product-img'>
                     <h3><?=$product['product_name']?></h3>
                     <p><?=$product['product_description']?></p>
                     <p>&euro; <?=$product['price']?></p>
